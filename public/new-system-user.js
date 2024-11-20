@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prepare the data to send in the POST request
         const systemUserData = {
             username: systemUserName,  // Email is being used as the username
-            password: systemPassword, enable2fa, //password and encryption status
+            password: systemPassword, 
+            enable2fa, //password and encryption status
             role: systemUserRole
 
         };
