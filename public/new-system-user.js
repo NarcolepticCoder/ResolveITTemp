@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const systemUserName = document.getElementById('systemUserName').value;
         const systemPassword = document.getElementById('systemPassword').value;
         const systemUserRole = document.getElementById('systemUserRole').value;
+        const enable2fa = document.getElementById('systemUserRole').value;
+        
         const user = await Users.findOne({systemUserName});
         if (user) {
           return {
@@ -18,10 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prepare the data to send in the POST request
         const systemUserData = {
             username: systemUserName,  // Email is being used as the username
-            password: systemPassword, 
-            enable2fa, //password and encryption status
+            password: hashedPassword, 
+            enable2fa: enable2fa, //password and encryption status
             role: systemUserRole
-
         };
 
         // Make the POST request to create the new system user
