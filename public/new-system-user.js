@@ -5,13 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const systemUserName = document.getElementById('systemUserName').value;
         const systemPassword = document.getElementById('systemPassword').value;
         const systemUserRole = document.getElementById('systemUserRole').value;
-
-
+        const user = await Users.findOne({systemUserName});
+        if (user) {
+          return {
+            status: "fail",
+            message: "User already exists",
+          };
+        }
+        
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(systemPassword, salt);
         // Prepare the data to send in the POST request
         const systemUserData = {
             username: systemUserName,  // Email is being used as the username
-            password: systemPassword,
+            password: systemPassword, enable2fa, //password and encryption status
             role: systemUserRole
+
         };
 
         // Make the POST request to create the new system user
